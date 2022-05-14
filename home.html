@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Stock App</title>
+        <link rel="stylesheet" href="css/style.css?v=1.0.0">
+        <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
+    </head>
+
+    <body ng-app="StockApp" ng-controller="StockAppController">
+        <nav class="site-navbar-primary"></nav>
+        <div class="site-content site-container">
+            <div class="page-content {{showHomePage()}}">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Shares</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="stock in stocks" ng-click="stock.calculate()">
+                            <td>{{stock.Name}}</td>
+                            <td>{{stock.Quantity}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="page-content {{showStockCalculatePage()}}">
+                <input type="button" value="Back" ng-click="toPage('home')" class="btn-full"/>
+                <div style="margin-top: 10px; text-align: center;">{{stock.Name}}</div>
+                <div class="calculation-result">Date: <span>{{stock.Date}}</span></div>
+                <div class="calculation-result">Rate: <span>{{stock.Rate}}</span></div>
+                <div class="calculation-result">No of Shares: <span>{{stock.Quantity}}</span></div>
+                <div class="calculation-result" ng-show="stock.showBonusQuantity()">Bonus Shares: <span>{{stock.bonusQuantity()}}</span>
+                    <label><input ng-model="includeBonus" type="checkbox"/> Include</label>
+                </div>
+                <div class="calculation-result">Subtotal: <span>{{stock.subtotalText()}}</span></div>
+                <div class="calculation-result">Commission: <span>{{stock.Commition}}</span></div>
+                <div class="calculation-result">Total: <span>{{stock.totalText()}}</span></div>
+                <div class="calculation-result">Safe Sale Rate: <span>{{stock.safeSaleRate()}}</span></div>
+                <div class="form-item" style="padding-top: 20px;">
+                    <label for="sale-rate">Sale Rate:</label>
+                    <input name="sale-rate" type="text" ng-model="saleRate"/>
+                </div>
+                <div class="calculation-result">Subtotal: <span>{{stock.sellSubtotalAmountText()}}</span></div>
+                <div class="calculation-result">Commission: <span>{{stock.sellCommissionAmount()}}</span></div>
+                <div class="calculation-result">Total: <span>{{stock.sellTotalAmountText()}}</span></div>
+                <div class="calculation-result">Income: <span>{{stock.income()}}</span></div>
+            </div>
+        </div>
+
+
+        <script>var database = '<?= database =?>';</script>
+        <script type="text/javascript" src="js/angular.min.js?v=1.6.6"></script>
+        <script type="text/javascript" src="js/script.js?v=1.0.0"></script>
+        <script type="text/javascript" src="js/home.js?v=1.0.0"></script>
+    </body>
+</html>

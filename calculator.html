@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Stock App</title>
+        <link rel="stylesheet" href="css/style.css?v=1.0.0">
+        <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
+    </head>
+
+    <body ng-app="StockApp" ng-controller="StockAppController">
+        <nav class="site-navbar-primary"></nav>
+        <div class="site-content site-container">
+            <div class="form-item">
+                <label for="rate">Rate:</label>
+                <input name="rate" type="text" ng-model="rate"/>
+            </div>
+            <div class="form-item" style="padding-top: 10px;">
+                <label for="no-of-shares">No of Shares:</label>
+                <input name="no-of-shares" type="text" ng-model="noOfShares"/>
+            </div>
+            <div class="form-item" style="padding-top: 10px;">
+                <label for="bonus-quantity">Bonus Shares:</label>
+                <input name="bonus-quantity" type="text" ng-model="bonusQty"/>
+            </div>
+            
+            <div class="form-item">
+                <label for="investment-amount">Investment Amount:</label>
+                <input name="investment-amount" type="text" ng-model="investmentAmount" ng-change="calculateNoOfShares()"/>
+            </div>
+
+            <div class="calculation-result">Subtotal: <span>{{subtotalAmount()}}</span></div>
+            <div class="calculation-result">Commission: <span>{{commissionAmount()}}</span></div>
+            <div class="calculation-result">Total: <span>{{totalAmount()}}</span></div>
+            <div class="calculation-result">Safe Sale Rate: <span>{{safeSaleRate()}}</span></div>
+            <div class="form-item" style="padding-top: 20px;">
+                <label for="sale-rate">Sale Rate:</label>
+                <input name="sale-rate" type="text" ng-model="saleRate"/>
+            </div>
+            <div class="calculation-result">Subtotal: <span>{{sellSubtotalAmount()}}</span></div>
+            <div class="calculation-result">Commission: <span>{{sellCommissionAmount()}}</span></div>
+            <div class="calculation-result">Total: <span>{{sellTotalAmount()}}</span></div>
+            <div class="calculation-result">Income: <span>{{income()}}</span></div>
+        </div>
+
+
+        <script type="text/javascript" src="js/angular.min.js?v=1.6.6"></script>
+        <script type="text/javascript" src="js/script.js?v=1.0.0"></script>
+        <script type="text/javascript" src="js/calculator.js?v=1.0.0"></script>
+    </body>
+</html>

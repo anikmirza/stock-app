@@ -1,0 +1,24 @@
+Include cash Devidents
+
+
+Calculate With Multiple Buy Price Combined
+
+
+On History Page do this
+
+1 OCT 2020
+ABBANK
+Buy
+1000 shares
+
+Stock
+1000 shares
+
+
+1 OCT 2020
+ABBANK
+Sell
+1000 shares
+
+Stock
+0 shares

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Stock App</title>
+        <link rel="stylesheet" href="css/style.css?v=1.0.0">
+        <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
+    </head>
+
+    <body ng-app="StockApp" ng-controller="StockAppController">
+        <nav class="site-navbar-primary"></nav>
+        <div class="site-content site-container">
+            <div class="form-item">
+                <label for="user">User:</label>
+                <select name="user" ng-model="user" style="width: 200px;">
+                    <option ng-repeat="userData in users" value="{{userData.dataSource}}">{{userData.name}}</option>
+                </select>
+            </div>
+            <input type="button" value="Save" ng-click="save()" class="btn-full" style="margin-top: 10px;"/>
+        </div>
+
+
+        <script type="text/javascript" src="js/angular.min.js?v=1.6.6"></script>
+        <script type="text/javascript" src="js/script.js?v=1.0.0"></script>
+        <script type="text/javascript" src="js/setting.js?v=1.0.0"></script>
+    </body>
+</html>

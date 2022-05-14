@@ -1,0 +1,280 @@
+body {
+    margin: 0;
+    font-family: arial;
+    background: #232323;
+    color: #dfdfdf;
+    font-size: 20px;
+}
+
+input[type="text"],
+input[type="submit"],
+input[type="date"],
+input[type="button"],
+button,
+select {
+    background: #373737;
+    border: 1px solid #4b4b4b;
+    color: #dfdfdf;
+    font-size: 20px;
+}
+
+input[type="text"]:hover,
+input[type="text"]:focus,
+input[type="date"]:hover,
+input[type="date"]:focus,
+textarea:hover,
+textarea:focus {
+    background: #4b4b4b;
+}
+
+input[type="submit"]:disabled,
+input[type="button"]:disabled,
+button:disabled {
+    color: #8f8f8f;
+}
+
+table {
+    width: 100%;
+    margin: 0 0 15px 0;
+    border: 1px solid #666;
+    border-spacing: 0;
+    border-collapse: collapse;
+    text-align: left;
+    border-spacing: 0;
+}
+
+th,td {
+    padding: 12px 10px;
+}
+
+th {
+    font-weight: 700;
+}
+
+td {
+    border-top: 1px solid #666;
+}
+
+body {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.site-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.site-content {
+    margin-top: 50px;
+    padding: 0 10px;
+}
+
+/* Primary navbar */
+
+.site-navbar-primary {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 2000px;
+    padding: 0 20px;
+    background: #2d2d2d;
+    border-bottom: 1px solid #373737;
+    z-index: 1;
+}
+
+.site-navbar-primary ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.site-navbar-primary li {
+    display: inline-block;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.site-navbar-primary li.on {
+    background: #373737;
+}
+
+.site-navbar-primary .fa-bell {
+    position: fixed;
+    top: 12px;
+    right: -1000px;
+    z-index: 1;
+}
+
+.btn-full {
+    width: 100%;
+    padding: 6px;
+}
+
+.page-content:not(.on) {
+    display: none;
+}
+
+.form-item > * {
+    display: block;
+}
+
+.calculation-result {
+    padding-top: 10px;
+}
+
+.calculation-result span {
+    color: #de3545;
+}
+
+.btn-option {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    height: 50px;
+    width: 50px;
+    background: #2d2d2d;
+    border-bottom: 1px solid #373737;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    font-size: 40px;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+}
+
+/**
+* #.# Manage Item Portal
+*
+* Styling of the Manage Item Portal HTML elements and classes.
+*/
+
+.manage-item-modal {
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.8);
+    -webkit-transition: visibility 0.2s, opacity 0.2s ease-in;
+    -moz-transition: visibility 0.2s, opacity 0.2s ease-in;
+    -o-transition: visibility 0.2s, opacity 0.2s ease-in;
+    -ms-transition: visibility 0.2s, opacity 0.2s ease-in;
+    transition: visibility 0.2s, opacity 0.2s ease-in;
+    z-index: 100;
+}
+
+.manage-item-modal.on {
+    visibility: visible;
+    opacity: 1;
+}
+
+.manage-item-modal > div {
+    overflow: visible;
+}
+
+.manage-item-modal .modal-container {
+    max-width: 400px;
+    margin: auto;
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.manage-item-modal .modal-head {
+    position: relative;
+    padding: 8px 36px 8px 11px;
+    background: #0f0f0f;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.manage-item-modal .modal-head .close-btn {
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+    height: 42px;
+    width: 42px;
+    background: #191919;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    line-height: 42px;
+    cursor: pointer;
+}
+
+.manage-item-modal .modal-body {
+    padding: 10px;
+    background: #232323;
+}
+
+.manage-item-modal .form-container {
+    margin: 0 4px 6px;
+}
+
+.manage-item-modal .form-group > label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.manage-item-modal .form-group:not(:first-child) {
+    margin-top: 15px;
+}
+/*
+.manage-item-modal input[type="text"],
+.manage-item-modal input[type="number"],
+.manage-item-modal input[type="date"],
+.manage-item-modal input[type="time"],
+.manage-item-modal textarea {
+    display: block;
+    width: 95%;*/ /* For unsupported browsers */
+    /*width: calc(100% - 22px);
+    padding: 5px 10px;
+}
+
+.manage-item-modal select,
+.manage-item-modal .form-container input[type="submit"],
+.manage-item-modal .form-container input[type="button"],
+.manage-item-modal .form-container button {
+    width: 100%;
+    padding: 5px 10px;
+}
+
+.manage-item-modal .modal-confirm :not(:first-child) {
+    margin-left: 10px;
+}*/
+
+/**
+* #.# Media Query Samll Mobile Screen
+*
+* Media Queries that applies when screen width is less than or equal to 440px (Samll Mobile device).
+*/
+
+@media screen and (max-width: 440px) {
+
+    /* Hode on small screen device */
+    .on-mobile-hide {
+        display: none !important; /* This needs to apply for all elements */
+    }
+    
+    .site-navbar-primary {
+        padding: 0;
+    }
+}

@@ -1,0 +1,118 @@
+{
+    "current": {
+        "BRACBANK": {
+            "Commition":104.15,
+            "Date":"18-Jun-2018",
+            "Quantity":277,
+            "Rate":75.2
+        }
+    },
+    "history": [
+        {
+            "Id": 1,
+            "Name": "BRACBANK",
+            "Quantity": 98,
+            "BuyDate": "02-Nov-2017",
+            "SellDate": "12-Nov-2017",
+            "BuyRate": 101.7,
+            "SellRate": 107,
+            "BuyCommition": 49.83,
+            "SellCommition": 52.43
+        },
+        {
+            "Id": 2,
+            "Name": "DUTCHBANGL",
+            "Quantity": 64,
+            "BuyDate": "02-Nov-2017",
+            "SellDate": "12-Nov-2017",
+            "BuyRate": 156,
+            "SellRate": 160,
+            "BuyCommition": 49.92,
+            "SellCommition": 51.2
+        },
+        {
+            "Id": 3,
+            "Name": "DUTCHBANGL",
+            "Quantity": 259,
+            "BuyDate": "16-Nov-2017",
+            "SellDate": "20-Jan-2019",
+            "BuyRate": 154.1,
+            "SellRate": 164,
+            "BuyCommition": 199.56,
+            "SellCommition": 212.38
+        },
+        {
+            "Id": 4,
+            "Name": "IFIC",
+            "Quantity": 1672,
+            "BonusQty": 350,
+            "BuyDate": "19-Mar-2019",
+            "SellDate": "17-Sep-2020",
+            "BuyRate": 11.9,
+            "SellRate": 12,
+            "BuyCommition": 99.48,
+            "SellCommition": 121.32
+        },
+        {
+            "Id": 5,
+            "Name": "ABBANK",
+            "Quantity": 1644,
+            "BonusQty": 82,
+            "BuyDate": "18-Feb-2019",
+            "SellDate": "23-May-2021",
+            "BuyRate": 12.1,
+            "SellRate": 12.8,
+            "BuyCommition": 99.46,
+            "SellCommition": 110.46
+        },
+        {
+            "Id": 6,
+            "Name": "SIBL",
+            "Quantity": 458,
+            "BonusQty": 105,
+            "BuyDate": "15-Apr-2019",
+            "SellDate": "27-May-2021",
+            "BuyRate": 14.6,
+            "SellRate": 14.8,
+            "BuyCommition": 33.43,
+            "SellCommition": 41.66
+        },
+        {
+            "Id": 7,
+            "Name": "SIBL",
+            "Quantity": 225,
+            "BonusQty": 0,
+            "BuyDate": "16-Apr-2019",
+            "SellDate": "27-May-2021",
+            "BuyRate": 14.5,
+            "SellRate": 14.8,
+            "BuyCommition": 16.31,
+            "SellCommition": 16.65
+        },
+        {
+            "Id": 8,
+            "Name": "STANDBANKL",
+            "Quantity": 6067,
+            "BonusQty": 0,
+            "BuyDate": "12-Apr-2021",
+            "SellDate": "27-May-2021",
+            "BuyRate": 8.2,
+            "SellRate": 10.1,
+            "BuyCommition": 248.75,
+            "SellCommition": 306.38
+        },
+        {
+            "Id": 9,
+            "Name": "ABBANK",
+            "Quantity": 86,
+            "BonusQty": 0,
+            "BuyDate": "15-Jun-2021",
+            "SellDate": "22-Jun-2021",
+            "BuyRate": 0,
+            "SellRate": 13.8,
+            "BuyCommition": 0,
+            "SellCommition": 10
+        }
+    ],
+    "version": 1
+}

@@ -1,0 +1,77 @@
+.top-notification {
+    padding-bottom: 10px;
+    color: #de0000;
+    text-align: center;
+}
+
+.highlighted-text {
+    color: #00bb00;
+}
+
+.datagrid-nav-btn {
+    background: #373737;
+    text-align: center;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.datagrid-nav-btn td {
+    padding: 0;
+}
+
+#companies-container tbody tr[data-checked="true"] {
+    background: #373737;
+}
+
+#companies-container tbody tr[data-buyable="true"] {
+    background: #4c2927;
+}
+
+#companies-container tbody tr[data-sellable="true"] {
+    background: #21351a;
+}
+
+#companies-container tr > :not(:first-child) {
+    text-align: right;
+}
+
+[data-price-status="up"] {
+    color: #00bb00;
+}
+
+[data-price-status="fall"] {
+    color: #de0000;
+}
+
+.site-navbar-primary .fa-bell {
+    right: 30px;
+}
+
+.path-to-dse {
+    color: #fff;
+    text-decoration: none;
+}
+
+@media screen and ( max-width: 390px ) {
+    .site-content {
+        padding: 0 2px;
+    }
+
+    #companies-container tr > :first-child {
+        max-width: 70px;
+        overflow: hidden;
+    }
+}
+
+/**
+* #.# Media Query Samll Mobile Screen
+*
+* Media Queries that applies when screen width is less than or equal to 440px (Samll Mobile device).
+*/
+
+@media screen and (max-width: 440px) {
+
+    .site-navbar-primary .fa-bell {
+        right: 10px;
+    }
+}

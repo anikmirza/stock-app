@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Stock App</title>
+        <link rel="stylesheet" href="/css/style.css?v=1.0.0">
+        <link rel="stylesheet" href="/font-awesome-4.6.3/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/live-data.css?v=1.0.0">
+    </head>
+    <body>
+        <nav class="site-navbar-primary"></nav>
+        <div class="btn-option" onclick="page.onOptionClick()"><i id="floating-btn" class="fa fa-cog"></i></div>
+        
+        <div class="site-content site-container">
+            <div class="top-notification">No Internet</div>
+            <button onclick="page.refresh()" class="btn-full">Refresh</button>
+            <table id="companies-container">
+                <thead>
+                    <tr>
+                        <th onclick="page.sortWith('code')">Code <span id="sort-icon-code" class="sort-icon"></span></th>
+                        <th onclick="page.sortWith('ltp')"><span id="sort-icon-ltp" class="sort-icon"></span> LTP</th>
+                        <th onclick="page.sortWith('high')"><span id="sort-icon-high" class="sort-icon"></span> High</th>
+                        <th onclick="page.sortWith('low')"><span id="sort-icon-low" class="sort-icon"></span> Low</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div id="live-data-container"></div>
+        
+        <div id="details-modal" class="manage-item-modal">
+            <div class="site-container">
+                <div class="modal-container">
+                    <div class="modal-head">
+                        <span class="header-text company-code"></span>
+                        <span class="close-btn" onclick="page.closeDetailsModal()"><i class="fa fa-times"></i></span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-container">
+                            <div class="form-group">
+                                <label>Last Trading Price: <span class="highlighted-text company-ltp"></span></label>
+                            </div>
+                            <div class="form-group">
+                                <label>Change: <span class="highlighted-text company-change" data-price-status="false"></span></label>
+                            </div>
+                            <div class="form-group">
+                                <label>High: <span class="highlighted-text company-high"></span></label>
+                            </div>
+                            <div class="form-group">
+                                <label>Low: <span class="highlighted-text company-low"></span></label>
+                            </div>
+                            <div class="form-group">
+                                <label>Yesterday's Closing Price: <span class="highlighted-text company-ycp"></span></label>
+                            </div>
+                            <div class="form-group">
+                                <label>Closing Price: <span class="highlighted-text company-closep"></span></label>
+                            </div>
+                                
+                            <div class="form-group">
+                                <label>Day's Value (mn): <span class="highlighted-text company-value-mn"></span></label>
+                            </div>
+                            <div class="form-group">
+                                <label>Day's Volume (Nos.): <span class="highlighted-text company-volume"></span></label>
+                            </div>
+                            <div class="form-group">
+                                <label>Day's Trade (Nos.): <span class="highlighted-text company-trade"></span></label>
+                            </div>
+                            <div class="form-group company-buy-target-container">
+                                <label>Buy Target: <span class="highlighted-text company-buy-target"></span></label>
+                            </div>
+                            <div class="form-group company-sell-target-container">
+                                <label>Sell Target: <span class="highlighted-text company-sell-target"></span></label>
+                            </div>
+                            <div class="form-group">
+                                <button onclick="page.openTargetEdit()" class="btn-full">Set Target</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="settings-modal" class="manage-item-modal">
+            <div class="site-container">
+                <div class="modal-container">
+                    <div class="modal-head">
+                        <span class="header-text">Settings</span>
+                        <span class="close-btn" onclick="page.closeSettingsModal()"><i class="fa fa-times"></i></span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-container">
+                            <div class="form-group">
+                                <input class="btn-full" type="button" value="Check Mode" onclick="page.switchToCheckMode()"/>
+                            </div>
+                            <div class="form-group">
+                                <label><input id="settings-only-show-checked" type="checkbox"/> Only show Checked</label>
+                            </div>
+                            <div class="form-group">
+                                <label><input id="settings-only-show-buyable" type="checkbox"/> Only show Buyable</label>
+                            </div>
+                            <div class="form-group">
+                                <label><input id="settings-only-show-sellable" type="checkbox"/> Only show Sellable</label>
+                            </div>
+                            <div class="form-group">
+                                <button onclick="page.updateSettings()" class="btn-full">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="target-edit-modal" class="manage-item-modal">
+            <div class="site-container">
+                <div class="modal-container">
+                    <div class="modal-head">
+                        <span class="header-text company-code"></span>
+                        <span class="close-btn" onclick="page.closeTargetEditModal()"><i class="fa fa-times"></i></span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-container">
+                            <div class="form-item">
+                                <label for="buy-target">Buy Target:</label>
+                                <input name="buy-target" type="text" id="company-buy-target-data"/>
+                            </div>
+                            <div class="form-item" style="padding-top: 20px;">
+                                <label for="sell-target">Sell Target:</label>
+                                <input name="sell-target" type="text" id="company-sell-target-data"/>
+                            </div>
+                            <div class="form-group">
+                                <button onclick="page.updateTargetPrice()" class="btn-full">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script type="text/javascript" src="/js/script.js?v=1.0.0"></script>
+        <script type="text/javascript" src="/js/live-data.js?v=1.0.0"></script>
+    </body>
+</html>

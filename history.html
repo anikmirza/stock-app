@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Stock App</title>
+        <link rel="stylesheet" href="css/style.css?v=1.0.0">
+        <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
+    </head>
+
+    <body ng-app="StockApp" ng-controller="StockAppController">
+        <nav class="site-navbar-primary"></nav>
+        <div class="btn-option" ng-click="btnOptionClick()"><i class="fa {{btnOptionClass()}}"></i></div>
+        <div class="site-content site-container">
+            <div class="page-content {{showHistoryPage()}}">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Buy Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="historyData in history" ng-click="historyData.details()" ng-show="historyData.display">
+                            <td>{{historyData.Name}}</td>
+                            <td>{{historyData.BuyDate}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="page-content {{showHistoryFilterPage()}}">
+                <input type="button" value="Reset" ng-click="historyPage()" class="btn-full"/>
+                
+                <div class="form-item" style="padding-top: 10px;">
+                    <label for="name">Name:</label>
+                    <input name="name" type="text" ng-model="historyFilter.Name"/>
+                </div>
+                <div class="form-item" style="padding-top: 10px;">
+                    <label for="buy-date-from">Buy Date:</label>
+                    <input name="buy-date-from" type="date" ng-model="historyFilter.BuyDateFrom"/>
+                    <input name="buy-date-to" type="date" ng-model="historyFilter.BuyDateTo"/>
+                </div>
+                <div class="form-item" style="padding-top: 10px;">
+                    <label for="sell-date-from">Sell Date:</label>
+                    <input name="sell-date-from" type="date" ng-model="historyFilter.SellDateFrom"/>
+                    <input name="sell-date-to" type="date" ng-model="historyFilter.SellDateTo"/>
+                </div>
+            </div>
+            <div class="page-content {{showHistoryDetailsPage()}}">
+                <input type="button" value="Back" ng-click="toPage('history')" class="btn-full"/>
+                <div style="margin-top: 10px; text-align: center;">{{historyDetails.Name}}</div>
+                
+                <div class="calculation-result">Buy Date: <span>{{historyDetails.BuyDate}}</span></div>
+                <div class="calculation-result">Sell Date: <span>{{historyDetails.SellDate}}</span></div>
+                <div class="calculation-result">Income: <span>{{historyDetails.income()}}</span></div>
+                <div class="calculation-result">No of Shares: <span>{{historyDetails.Quantity}}</span></div>
+                <div class="calculation-result" ng-show="historyDetails.showBonusQuantity()">Bonus Shares: <span>{{historyDetails.bonusQuantity()}}</span></div>
+                
+                <table style="margin-top: 10px;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Buy</th>
+                            <th>Sell</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Rate</th>
+                            <td>{{historyDetails.BuyRate}}</td>
+                            <td>{{historyDetails.SellRate}}</td>
+                        </tr>
+                        <tr>
+                            <th>SubT</th>
+                            <td>{{historyDetails.subtotalText()}}</td>
+                            <td>{{historyDetails.sellSubtotalAmountText()}}</td>
+                        </tr>
+                        <tr>
+                            <th>Comm</th>
+                            <td>{{historyDetails.BuyCommition}}</td>
+                            <td>{{historyDetails.SellCommition}}</td>
+                        </tr>
+                        <tr>
+                            <th>Total</th>
+                            <td>{{historyDetails.totalText()}}</td>
+                            <td>{{historyDetails.sellTotalAmountText()}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <script>var database = '<?= database =?>';</script>
+        <script type="text/javascript" src="js/angular.min.js?v=1.6.6"></script>
+        <script type="text/javascript" src="js/script.js?v=1.0.0"></script>
+        <script type="text/javascript" src="js/history.js?v=1.0.0"></script>
+    </body>
+</html>
