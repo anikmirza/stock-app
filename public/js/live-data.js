@@ -26,6 +26,7 @@ var page = {
     checkMode: false,
     settings: {},
     checkedCompanies: [],
+    buyModalNoOfSharesTimeOut: null,
     topNotification: {
         obj: function() { return document.querySelector(".top-notification"); },
         show: function() { return this.obj().hidden = false; },
@@ -51,6 +52,15 @@ var page = {
         page.loadSettings();
         page.updateLiveData();
         manageItemModal.load();
+        page.bindEvents();
+    },
+    bindEvents: function() {
+        document.getElementById("buy-no-of-shares").addEventListener('keyup', function() {
+            page.buyModalNoOfSharesTimeOut = null;
+            page.buyModalNoOfSharesTimeOut = setTimeout(function() {
+                page.calculateBuyModalInfo();
+            }, 1000);
+        });
     },
     onOptionClick: function() {
         if (page.checkMode) {
@@ -202,6 +212,9 @@ var page = {
     closeDetailsModal: function() {
         document.getElementById("details-modal").classList.remove("on");
     },
+    closeBuyModal: function() {
+        document.getElementById("buy-modal").classList.remove("on");
+    },
     closeSettingsModal: function() {
         document.getElementById("settings-modal").classList.remove("on");
     },
@@ -214,6 +227,14 @@ var page = {
         document.getElementById("company-buy-target-data").value = page.companyBuyTarget();
         document.getElementById("company-sell-target-data").value = page.companySellTarget();
         document.getElementById("target-edit-modal").classList.add("on");
+    },
+    openBuyModal: function() {
+        page.closeDetailsModal();
+        document.querySelector("#buy-modal .company-code").innerHTML = page.company.code;
+        document.getElementById("buy-rate").innerHTML = page.company.ltp;
+        document.getElementById("buy-modal").classList.add("on");
+        document.getElementById("buy-no-of-shares").value = "";
+        document.getElementById("buy-no-of-shares").focus();
     },
     updateTargetPrice: function() {
         var company = { code: page.company.code };
@@ -407,6 +428,46 @@ var page = {
     nextBtnClick: function() {
         page.pagination.next();
         refreshCompaniesList();
+    },
+    calculateBuyModalInfo: function() {
+        var noOfShares = ZeroIfNotNumber(document.getElementById("buy-no-of-shares").value);
+        var rate = ZeroIfNotNumber(document.getElementById("buy-rate").innerHTML);
+        var subTotal = (parseFloat(noOfShares) * parseFloat(rate)).toFixed(2);
+        var commision = (parseFloat(subTotal) * 0.005).toFixed(2);
+        var totalCost = (parseFloat(subTotal) + parseFloat(commision)).toFixed(2);
+        document.getElementById("buy-sub-total").innerHTML = subTotal;
+        document.getElementById("buy-commision").innerHTML = commision;
+        document.getElementById("buy-total-cost").innerHTML = totalCost;
+    },
+    placeBuyOrder: function() {
+        var noOfShares = ZeroIfNotNumber(document.getElementById("buy-no-of-shares").value);
+        var rate = ZeroIfNotNumber(document.getElementById("buy-rate").innerHTML);
+        var commision = document.getElementById("buy-commision").innerHTML;
+        var order = {
+            code: page.company.code,
+            qty: noOfShares,
+            rate: rate,
+            commition: commision
+        };
+        req.post('/place-order/buy', JSON.stringify({ order: order }), function() {
+            page.closeBuyModal();
+            alert("Order Placed");
+        }, function(err) {
+            alert("There was a problem with the connection. Please try again");
+        });
+    },
+    placeSellOrder: function() {
+        if (!confirm("Sell your stock for Company: " + page.company.code)) return;
+        var order = {
+            code: page.company.code,
+            rate:  page.company.ltp
+        };
+        req.post('/place-order/sell', JSON.stringify({ order: order }), function(response) {
+            page.closeDetailsModal();
+            alert(response);
+        }, function(err) {
+            alert("There was a problem with the connection. Please try again");
+        });
     }
 };
 
@@ -485,9 +546,15 @@ function refreshCompaniesList() {
             "<td>" + item.low + "</td>" +
         "</tr>";
     }
-    var prevButton = "<tr class='datagrid-nav-btn' onclick='page.prevBtnClick()'><td colspan='4'><i class='fa fa-angle-up'></i></td></tr>";
-    var nextButton = "<tr class='datagrid-nav-btn' onclick='page.nextBtnClick()'><td colspan='4'><i class='fa fa-angle-down'></i></td></tr>";
-    compContainer.innerHTML = prevButton + html + nextButton;
+    compContainer.innerHTML = html;
+}
+
+function IsNumber(Value) {
+    return ![null, ""].includes(Value) && !isNaN(Value);
+}
+
+function ZeroIfNotNumber(Value) {
+    return IsNumber(Value) ? Value : 0;
 }
 
 (function() {

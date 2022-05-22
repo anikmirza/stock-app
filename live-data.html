@@ -26,6 +26,8 @@
                 </thead>
                 <tbody></tbody>
             </table>
+            <button class='datagrid-nav-btn' onclick='page.prevBtnClick()'><i class='fa fa-angle-left'></i></button>
+            <button class='datagrid-nav-btn' onclick='page.nextBtnClick()' style="float: right;"><i class='fa fa-angle-right'></i></button>
         </div>
         <div id="live-data-container"></div>
         
@@ -73,7 +75,9 @@
                                 <label>Sell Target: <span class="highlighted-text company-sell-target"></span></label>
                             </div>
                             <div class="form-group">
-                                <button onclick="page.openTargetEdit()" class="btn-full">Set Target</button>
+                                <button onclick="page.openTargetEdit()" style="padding: 6px 12px;"><i class="fa fa-bullseye"></i> Target</button>
+                                <button onclick="page.openBuyModal()" style="padding: 6px 12px;"><i class="fa fa-shopping-cart"></i> Buy</button>
+                                <button onclick="page.placeSellOrder()" style="padding: 6px 12px;"><i class="fa fa-usd"></i> Sell</button>
                             </div>
                         </div>
                     </div>
@@ -130,6 +134,32 @@
                             </div>
                             <div class="form-group">
                                 <button onclick="page.updateTargetPrice()" class="btn-full">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="buy-modal" class="manage-item-modal">
+            <div class="site-container">
+                <div class="modal-container">
+                    <div class="modal-head">
+                        <span class="header-text company-code"></span>
+                        <span class="close-btn" onclick="page.closeBuyModal()"><i class="fa fa-times"></i></span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-container">
+                            <div>
+                                <label for="buy-no-of-shares">No of Shares:</label>
+                                <input name="buy-no-of-shares" type="text" id="buy-no-of-shares" style="float: right;width: 50%;"/>
+                            </div>
+                            <div style="padding-top: 20px;">Rate: <span id="buy-rate" class="color-red">0</span></div>
+                            <div style="padding-top: 20px;">Sub total: <span id="buy-sub-total" class="color-red">0</span></div>
+                            <div style="padding-top: 20px;">Commision: <span id="buy-commision" class="color-red">0</span></div>
+                            <div style="padding-top: 20px;">Total Cost: <span id="buy-total-cost" class="color-red">0</span></div>
+                            <div class="form-group">
+                                <button onclick="page.placeBuyOrder()" class="btn-full">Place Order</button>
                             </div>
                         </div>
                     </div>

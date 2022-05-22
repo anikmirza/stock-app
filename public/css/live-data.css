@@ -9,14 +9,16 @@
 }
 
 .datagrid-nav-btn {
+    padding: 0;
+    width: 49.8%;
     background: #373737;
     text-align: center;
     cursor: pointer;
     font-size: 30px;
 }
 
-.datagrid-nav-btn td {
-    padding: 0;
+#companies-container {
+    margin-bottom: 0;
 }
 
 #companies-container tbody tr[data-checked="true"] {
@@ -39,7 +41,8 @@
     color: #00bb00;
 }
 
-[data-price-status="fall"] {
+[data-price-status="fall"],
+.color-red {
     color: #de0000;
 }
 

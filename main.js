@@ -185,7 +185,7 @@ app.get('/', function(req, res) {
             return value.id === userData.currentUser;
         });
 
-        if ('anik' === user.id) {
+        if ('abbu' != user.id) {
             toHome(res, user.dataSource);
         } else {
             request(firebaseUrl + 'version.json', function (error, response, currentVersion) {
@@ -209,6 +209,73 @@ app.get('/', function(req, res) {
                 });
             });
         }
+    });
+});
+
+app.post('/place-order/buy', function(req, res) {
+    var orderObj = req.body.order;
+    readJson('user-settings', function(err, data) {
+        if (err) { throw err; }
+        var settings = data ? data : {};
+        readJson('userData/' + settings.currentUser, function(err, data) {
+            if (err) { throw err; }
+            var userData = data ? data : {};
+            userData.current[orderObj.code] = {
+                Commition: parseFloat(orderObj.commition),
+                Date: toDateFormat(Date()),
+                Quantity: parseInt(orderObj.qty),
+                Rate: parseFloat(orderObj.rate)
+            };
+            saveJson('userData/' + settings.currentUser, userData, function(err) {
+                if (err) {
+                  res.status(404).send('Data was not saved');
+                  return;
+                }
+                res.send('Data was saved');
+            });
+        });
+    });
+});
+
+app.post('/place-order/sell', function(req, res) {
+    var orderObj = req.body.order;
+    readJson('user-settings', function(err, data) {
+        if (err) { throw err; }
+        var settings = data ? data : {};
+        readJson('userData/' + settings.currentUser, function(err, data) {
+            if (err) { throw err; }
+            var userData = data ? data : {};
+            if (!userData.current.hasOwnProperty(orderObj.code)) {
+                res.send('You dont own any shares of company: ' + orderObj.code);
+                return;
+            }
+            var buyInfo = userData.current[orderObj.code];
+            var maxId = userData.history.reduce(function(t, x) {
+                return x.Id > t ? x.Id : t;
+            }, 0);
+            var subTotal = (parseFloat(buyInfo.Quantity) * parseFloat(orderObj.rate)).toFixed(2);
+            var sellCommition = parseFloat((parseFloat(subTotal) * 0.005).toFixed(2));
+            var sellHistory = {
+                Id: maxId + 1,
+                Name: orderObj.code,
+                Quantity: buyInfo.Quantity,
+                BuyDate: buyInfo.Date,
+                SellDate: toDateFormat(Date()),
+                BuyRate: buyInfo.Rate,
+                SellRate: parseFloat(orderObj.rate),
+                BuyCommition: buyInfo.Commition,
+                SellCommition: sellCommition
+            };
+            userData.history.push(sellHistory);
+            delete userData.current[orderObj.code];
+            saveJson('userData/' + settings.currentUser, userData, function(err) {
+                if (err) {
+                  res.status(404).send('Data was not saved');
+                  return;
+                }
+                res.send('Order Placed');
+            });
+        });
     });
 });
 
@@ -247,4 +314,14 @@ function toHome(res, dataSource)
         var html = data.toString().replaceAll('<?= database =?>', database);
         res.send(html);
     });
+}
+
+function toDateFormat(date)
+{
+    var today = new Date(date);
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    today.getFullYear()
+    today.getDate()
+    months[today.getMonth()]
+    return today.getDate() + "-" + months[today.getMonth()] + "-" + today.getFullYear()
 }
